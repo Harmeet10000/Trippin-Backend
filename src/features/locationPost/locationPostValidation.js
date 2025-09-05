@@ -44,3 +44,21 @@ export const updateLocationPostSchema = Joi.object({
   amenities: Joi.array().items(Joi.string()),
   bestTimeToVisit: Joi.string()
 });
+
+export const createCategorySchema = Joi.object({
+  name: Joi.string().min(3).max(50).trim().required(),
+  description: Joi.string().max(200).trim()
+});
+
+export const validateIdParam = Joi.object({
+  id: Joi.string().hex().length(24).required()
+});
+
+export const validateJoiSchema = (schema, value) => {
+  const result = schema.validate(value);
+
+  return {
+    value: result.value,
+    error: result.error
+  };
+};

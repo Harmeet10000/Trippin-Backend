@@ -122,6 +122,11 @@ const userSchema = new Schema(
       }
     ]
   },
+    favoriteLocationPosts: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'LocationPost'
+    }]
+  },
   { timestamps: true }
 );
 

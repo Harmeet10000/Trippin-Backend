@@ -29,7 +29,8 @@ export const getLocationPost = async (postId) => {
 
 export const getAllLocationPosts = async (query) => {
   // In a real app, you'd use apiFeatures for filtering, sorting, pagination
-  return locationPostRepository.findAllLocationPosts(query);
+  const posts = await locationPostRepository.findAllLocationPosts(query);
+  return posts;
 };
 
 export const updateLocationPost = async (postId, updateData, user) => {
@@ -61,9 +62,11 @@ export const deleteLocationPost = async (postId, user) => {
 };
 
 export const createCategory = async (categoryData) => {
-  return locationPostRepository.createCategory(categoryData);
+  const newCategory = await  locationPostRepository.createCategory(categoryData);
+return newCategory;
 };
 
 export const getAllCategories = async () => {
-  return locationPostRepository.findAllCategories();
+  const categories = await locationPostRepository.findAllCategories();
+  return categories;
 };

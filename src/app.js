@@ -25,6 +25,7 @@ import subscriptionRoutes from './features/subscription/subscriptionRoutes.js';
 // import billingRoutes from './features/billing/billingRoutes.js';
 import notificationRoutes from './features/notifications/notificationRoutes.js';
 import s3Routes from './features/storage/s3Routes.js';
+import locationPostRoutes from './features/locationPost/locationPostRoutes.js';
 
 const app = express();
 
@@ -129,6 +130,7 @@ app.use('/api/v1/subscriptions', subscriptionRoutes);
 // app.use('/api/v1/billing', billingRoutes);
 app.use('/api/v1/notifications', notificationRoutes);
 app.use('/api/v1/upload', s3Routes);
+app.use('/api/v1/location-posts', locationPostRoutes);
 
 // 4) CATCHES ALL ROUTES THAT ARE NOT DEFINED
 app.all('*', (req, res, next) => {

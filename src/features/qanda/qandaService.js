@@ -2,10 +2,10 @@ import * as qandaRepository from './qandaRepository.js';
 import * as locationPostRepository from '../locationPost/locationPostRepository.js';
 import { httpError } from '../../utils/httpError.js';
 
-export const askQuestion = async (locationPostId, userId, questionText) => {
+export const askQuestion = async (locationPostId, userId, questionText, req, next) => {
   const locationPost = await locationPostRepository.findLocationPostById(locationPostId);
   if (!locationPost) {
-    throw new httpError(404, 'Location post not found');
+    return httpError(next, new Error('Location post not found'), req, 404);
   }
 
   const questionData = {
@@ -20,10 +20,10 @@ export const askQuestion = async (locationPostId, userId, questionText) => {
   return qandaRepository.createQuestion(questionData);
 };
 
-export const answerQuestion = async (questionId, userId, answerText) => {
+export const answerQuestion = async (questionId, userId, answerText, req, next) => {
   const question = await qandaRepository.findQuestionById(questionId);
   if (!question) {
-    throw new httpError(404, 'Question not found');
+    return httpError(next, new Error('Question not found'), req, 404);
   }
 
   // In a real system, you might check if the user is the business owner to set isOfficialAnswer

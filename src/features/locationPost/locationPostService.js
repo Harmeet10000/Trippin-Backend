@@ -1,10 +1,10 @@
 import * as locationPostRepository from './locationPostRepository.js';
 import { httpError } from '../../utils/httpError.js';
 
-export const createLocationPost = async (postData, user) => {
+export const createLocationPost = async (postData, user, req, next) => {
   const category = await locationPostRepository.findCategoryById(postData.category);
   if (!category) {
-    throw new httpError(404, 'Category not found');
+    return httpError(next, new Error('Category not found'), req, 404);
   }
 
   const locationData = {
@@ -19,10 +19,10 @@ export const createLocationPost = async (postData, user) => {
   });
 };
 
-export const getLocationPost = async (postId) => {
+export const getLocationPost = async (postId, req, next) => {
   const post = await locationPostRepository.findLocationPostById(postId);
   if (!post) {
-    throw new httpError(404, 'Location post not found');
+    return httpError(next, new Error('Location post not found'), req, 404);
   }
   return post;
 };
@@ -33,37 +33,37 @@ export const getAllLocationPosts = async (query) => {
   return posts;
 };
 
-export const updateLocationPost = async (postId, updateData, user) => {
+export const updateLocationPost = async (postId, updateData, user, req, next) => {
   const post = await locationPostRepository.findLocationPostById(postId);
   if (!post) {
-    throw new httpError(404, 'Location post not found');
+    return httpError(next, new Error('Location post not found'), req, 404);
   }
 
   // Add authorization check if needed (e.g., only author can update)
   if (post.postedBy._id.toString() !== user._id.toString()) {
-    throw new httpError(403, 'You are not authorized to update this post');
+    return httpError(next, new Error('You are not authorized to update this post'), req, 403);
   }
 
   return locationPostRepository.updateLocationPostById(postId, updateData);
 };
 
-export const deleteLocationPost = async (postId, user) => {
+export const deleteLocationPost = async (postId, user, req, next) => {
   const post = await locationPostRepository.findLocationPostById(postId);
   if (!post) {
-    throw new httpError(404, 'Location post not found');
+    return httpError(next, new Error('Location post not found'), req, 404);
   }
 
   // Add authorization check
   if (post.postedBy._id.toString() !== user._id.toString()) {
-    throw new httpError(403, 'You are not authorized to delete this post');
+    return httpError(next, new Error('You are not authorized to delete this post'), req, 403);
   }
 
   return locationPostRepository.deleteLocationPostById(postId);
 };
 
 export const createCategory = async (categoryData) => {
-  const newCategory = await  locationPostRepository.createCategory(categoryData);
-return newCategory;
+  const newCategory = await locationPostRepository.createCategory(categoryData);
+  return newCategory;
 };
 
 export const getAllCategories = async () => {

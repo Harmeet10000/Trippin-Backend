@@ -5,7 +5,7 @@ import {
   askQuestion,
   answerQuestion,
   getQandasForLocation
-} from 'src/features/qanda/qandaController';
+} from './qandaController.js';
 
 const router = express.Router();
 

@@ -1,7 +1,7 @@
 import * as locationPostService from './locationPostService.js';
 import { httpResponse } from '../../utils/httpResponse.js';
-import { catchAsync } from '../../utils/catchAsync.js';
 import { httpError } from '../../utils/httpError.js';
+import asyncHandler from 'express-async-handler';
 import {
   createLocationPostSchema,
   updateLocationPostSchema,
@@ -10,33 +10,33 @@ import {
   validateJoiSchema
 } from './locationPostValidation.js';
 
-export const createLocationPost = catchAsync(async (req, res, next) => {
+export const createLocationPost = asyncHandler(async (req, res, next) => {
   const { error, value } = validateJoiSchema(createLocationPostSchema, req.body);
   if (error) {
     return httpError(next, error, req, 422);
   }
 
-  const post = await locationPostService.createLocationPost(value, req.user);
+  const post = await locationPostService.createLocationPost(value, req.user, req, next);
   httpResponse(req, res, 201, 'Location post created successfully', post);
 });
 
-export const getLocationPost = catchAsync(async (req, res, next) => {
+export const getLocationPost = asyncHandler(async (req, res, next) => {
   const { error, value } = validateJoiSchema(validateIdParam, req.params);
   if (error) {
     return httpError(next, error, req, 422);
   }
 
-  const post = await locationPostService.getLocationPost(value.id);
+  const post = await locationPostService.getLocationPost(value.id, req, next);
   httpResponse(req, res, 200, 'Location post retrieved successfully', post);
 });
 
-export const getAllLocationPosts = catchAsync(async (req, res) => {
+export const getAllLocationPosts = asyncHandler(async (req, res) => {
   // Can add query validation here if needed
   const posts = await locationPostService.getAllLocationPosts(req.query);
   httpResponse(req, res, 200, 'Location posts retrieved successfully', posts);
 });
 
-export const updateLocationPost = catchAsync(async (req, res, next) => {
+export const updateLocationPost = asyncHandler(async (req, res, next) => {
   const { error: paramsError, value: paramsValue } = validateJoiSchema(validateIdParam, req.params);
   if (paramsError) {
     return httpError(next, paramsError, req, 422);
@@ -54,7 +54,7 @@ export const updateLocationPost = catchAsync(async (req, res, next) => {
   httpResponse(req, res, 200, 'Location post updated successfully', post);
 });
 
-export const deleteLocationPost = catchAsync(async (req, res, next) => {
+export const deleteLocationPost = asyncHandler(async (req, res, next) => {
   const { error, value } = validateJoiSchema(validateIdParam, req.params);
   if (error) {
     return httpError(next, error, req, 422);
@@ -64,7 +64,7 @@ export const deleteLocationPost = catchAsync(async (req, res, next) => {
   httpResponse(req, res, 200, 'Location post deleted successfully');
 });
 
-export const createCategory = catchAsync(async (req, res, next) => {
+export const createCategory = asyncHandler(async (req, res, next) => {
   const { error, value } = validateJoiSchema(createCategorySchema, req.body);
   if (error) {
     return httpError(next, error, req, 422);
@@ -73,7 +73,7 @@ export const createCategory = catchAsync(async (req, res, next) => {
   httpResponse(req, res, 201, 'Category created successfully', category);
 });
 
-export const getAllCategories = catchAsync(async (req, res) => {
+export const getAllCategories = asyncHandler(async (req, res) => {
   const categories = await locationPostService.getAllCategories();
   httpResponse(req, res, 200, 'Categories retrieved successfully', categories);
 });

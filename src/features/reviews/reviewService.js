@@ -2,10 +2,10 @@ import * as reviewRepository from './reviewRepository.js';
 import * as locationPostRepository from '../locationPost/locationPostRepository.js';
 import { httpError } from '../../utils/httpError.js';
 
-export const addReview = async (locationPostId, userId, reviewData) => {
+export const addReview = async (locationPostId, userId, reviewData, req, next) => {
   const locationPost = await locationPostRepository.findLocationPostById(locationPostId);
   if (!locationPost) {
-    throw new httpError(404, 'Location post not found');
+    return httpError(next, new Error('Location post not found'), req, 404);
   }
 
   const newReview = await reviewRepository.createReview({
@@ -24,13 +24,13 @@ export const getReviewsForLocation = async (locationPostId) => {
   return reviews;
 };
 
-export const updateReview = async (reviewId, userId, updateData) => {
+export const updateReview = async (reviewId, userId, updateData, req, next) => {
   const review = await reviewRepository.findReviewById(reviewId);
   if (!review) {
-    throw new httpError(404, 'Review not found');
+    return httpError(next, new Error('Review not found'), req, 404);
   }
   if (review.user.toString() !== userId.toString()) {
-    throw new httpError(403, 'You are not authorized to update this review');
+    return httpError(next, new Error('You are not authorized to update this review'), req, 403);
   }
 
   const updatedReview = await reviewRepository.updateReviewById(reviewId, updateData);
@@ -39,13 +39,13 @@ export const updateReview = async (reviewId, userId, updateData) => {
   return updatedReview;
 };
 
-export const deleteReview = async (reviewId, userId) => {
+export const deleteReview = async (reviewId, userId, req, next) => {
   const review = await reviewRepository.findReviewById(reviewId);
   if (!review) {
-    throw new httpError(404, 'Review not found');
+    return httpError(next, new Error('Review not found'), req, 404);
   }
   if (review.user.toString() !== userId.toString()) {
-    throw new httpError(403, 'You are not authorized to delete this review');
+    return httpError(next, new Error('You are not authorized to delete this review'), req, 403);
   }
 
   await reviewRepository.deleteReviewById(reviewId);

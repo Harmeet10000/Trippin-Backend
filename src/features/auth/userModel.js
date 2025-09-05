@@ -120,8 +120,7 @@ const userSchema = new Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Device'
       }
-    ]
-  },
+    ],
     favoriteLocationPosts: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'LocationPost'

@@ -8,7 +8,7 @@ import {
   getLocationPost,
   updateLocationPost,
   deleteLocationPost
-} from 'src/features/locationPost/locationPostController.js';
+} from './locationPostController.js';
 
 const router = express.Router();
 

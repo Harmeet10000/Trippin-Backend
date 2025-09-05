@@ -1,0 +1,451 @@
+{
+  "info": {
+    "_postman_id": "a8a2a3a4-a3a4-4a3a-a3a4-a3a4a3a4",
+    "name": "Trippin-Backend API",
+    "description": "Postman collection for the Trippin-Backend API, covering Location Posts, Reviews, and Q&A.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "LocationPosts",
+      "item": [
+        {
+          "name": "Create Category",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Mountains\",\n  \"description\": \"Scenic mountain ranges and peaks.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/location-posts/categories",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "location-posts",
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Categories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/location-posts/categories",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "location-posts",
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Location Post",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Himalayan Peak\",\n    \"description\": \"A beautiful and challenging climb.\",\n    \"coverImage\": \"http://example.com/himalayas.jpg\",\n    \"category\": \"YOUR_CATEGORY_ID\",\n    \"address\": \"Himalayan Range, Nepal\",\n    \"location\": {\n        \"coordinates\": [86.9250, 27.9881]\n    }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/location-posts",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "location-posts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Location Posts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/location-posts",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "location-posts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Location Post by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/location-posts/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "location-posts",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "YOUR_LOCATION_POST_ID"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Location Post",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Updated Himalayan Peak Title\"}"
+            },
+            "url": {
+              "raw": "{{base_url}}/location-posts/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "location-posts",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "YOUR_LOCATION_POST_ID"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Location Post",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/location-posts/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "location-posts",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "YOUR_LOCATION_POST_ID"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Reviews",
+      "item": [
+        {
+          "name": "Add Review",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"rating\": 5,\n    \"title\": \"Best Climb Ever!\",\n    \"comment\": \"The experience was unforgettable. Highly recommended!\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/location-posts/:locationPostId/reviews",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "location-posts",
+                ":locationPostId",
+                "reviews"
+              ],
+              "variable": [
+                {
+                  "key": "locationPostId",
+                  "value": "YOUR_LOCATION_POST_ID"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Reviews for Location",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/location-posts/:locationPostId/reviews",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "location-posts",
+                ":locationPostId",
+                "reviews"
+              ],
+              "variable": [
+                {
+                  "key": "locationPostId",
+                  "value": "YOUR_LOCATION_POST_ID"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Review",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"comment\": \"The experience was unforgettable. Highly recommended, but be prepared for the cold!\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/reviews/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "reviews",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "YOUR_REVIEW_ID"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Review",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/reviews/:id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "reviews",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "YOUR_REVIEW_ID"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Q&A",
+      "item": [
+        {
+          "name": "Ask Question",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"questionText\": \"What is the best season to attempt the climb?\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/location-posts/:locationPostId/questions",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "location-posts",
+                ":locationPostId",
+                "questions"
+              ],
+              "variable": [
+                {
+                  "key": "locationPostId",
+                  "value": "YOUR_LOCATION_POST_ID"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Q&As for Location",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/location-posts/:locationPostId/questions",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "location-posts",
+                ":locationPostId",
+                "questions"
+              ],
+              "variable": [
+                {
+                  "key": "locationPostId",
+                  "value": "YOUR_LOCATION_POST_ID"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Answer Question",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"answerText\": \"The pre-monsoon season (March to May) is generally considered the best time.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/questions/:questionId/answers",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "questions",
+                ":questionId",
+                "answers"
+              ],
+              "variable": [
+                {
+                  "key": "questionId",
+                  "value": "YOUR_QUESTION_ID"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000/api/v1"
+    },
+    {
+      "key": "jwt_token",
+      "value": "YOUR_JWT_TOKEN_HERE"
+    }
+  ]
+}

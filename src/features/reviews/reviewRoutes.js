@@ -5,7 +5,7 @@ import {
   getReviewsForLocation,
   updateReview,
   deleteReview
-} from 'src/features/reviews/reviewController.js';
+} from './reviewController.js';
 
 const router = express.Router();
 
@@ -83,7 +83,7 @@ router.get('/location-posts/:locationPostId/reviews', getReviewsForLocation);
  *       403: { description: "Forbidden" }
  *       404: { description: "Review not found" }
  */
-router.patch('/reviews/:id', updateReview);
+router.patch('/:id', updateReview);
 
 /**
  * @swagger
@@ -100,6 +100,6 @@ router.patch('/reviews/:id', updateReview);
  *       403: { description: "Forbidden" }
  *       404: { description: "Review not found" }
  */
-router.delete('/reviews/:id', deleteReview);
+router.delete('/:id', deleteReview);
 
 export default router;

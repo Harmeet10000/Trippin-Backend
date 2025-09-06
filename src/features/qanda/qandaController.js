@@ -26,7 +26,7 @@ export const askQuestion = asyncHandler(async (req, res, next) => {
 
   const qanda = await qandaService.askQuestion(
     paramsValue.locationPostId,
-    req.user._id,
+    req?.user?._id,
     bodyValue.questionText,
     req,
     next
@@ -50,7 +50,7 @@ export const answerQuestion = asyncHandler(async (req, res, next) => {
 
   const qanda = await qandaService.answerQuestion(
     paramsValue.questionId,
-    req.user._id,
+    req?.user?._id,
     bodyValue.answerText,
     req,
     next

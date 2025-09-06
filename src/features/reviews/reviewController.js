@@ -26,7 +26,7 @@ export const addReview = asyncHandler(async (req, res, next) => {
 
   const review = await reviewService.addReview(
     paramsValue.locationPostId,
-    req.user._id,
+    req?.user?._id,
     bodyValue,
     req,
     next
@@ -57,7 +57,7 @@ export const updateReview = asyncHandler(async (req, res, next) => {
 
   const review = await reviewService.updateReview(
     paramsValue.id,
-    req.user._id,
+    req?.user?._id,
     bodyValue,
     req,
     next
@@ -71,6 +71,6 @@ export const deleteReview = asyncHandler(async (req, res, next) => {
     return httpError(next, error, req, 422);
   }
 
-  await reviewService.deleteReview(value.id, req.user._id, req, next);
+  await reviewService.deleteReview(value.id, req?.user?._id, req, next);
   httpResponse(req, res, 200, 'Review deleted successfully');
 });

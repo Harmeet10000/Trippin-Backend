@@ -14,7 +14,7 @@ export const createLocationPost = async (postData, user, req, next) => {
 
   return locationPostRepository.createLocationPost({
     ...postData,
-    postedBy: user._id || '687926380911cf24d2eedf07',
+    postedBy: user?._id ?? '687926380911cf24d2eedf07',
     location: locationData
   });
 };
@@ -40,9 +40,9 @@ export const updateLocationPost = async (postId, updateData, user, req, next) =>
   }
 
   // Add authorization check if needed (e.g., only author can update)
-  if (post.postedBy._id.toString() !== (user._id.toString() || '687926380911cf24d2eedf07')) {
-    return httpError(next, new Error('You are not authorized to update this post'), req, 403);
-  }
+  // if (post.postedBy._id.toString() !== (user._id.toString() ?? '687926380911cf24d2eedf07')) {
+  //   return httpError(next, new Error('You are not authorized to update this post'), req, 403);
+  // }
 
   return locationPostRepository.updateLocationPostById(postId, updateData);
 };
@@ -54,9 +54,9 @@ export const deleteLocationPost = async (postId, user, req, next) => {
   }
 
   // Add authorization check
-  if (post.postedBy._id.toString() !== (user._id.toString() || '687926380911cf24d2eedf07')) {
-    return httpError(next, new Error('You are not authorized to delete this post'), req, 403);
-  }
+  // if (post.postedBy._id.toString() !== (user._id.toString() ?? '687926380911cf24d2eedf07')) {
+  //   return httpError(next, new Error('You are not authorized to delete this post'), req, 403);
+  // }
 
   return locationPostRepository.deleteLocationPostById(postId);
 };

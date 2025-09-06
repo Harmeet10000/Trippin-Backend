@@ -16,7 +16,7 @@ export const createLocationPost = asyncHandler(async (req, res, next) => {
     return httpError(next, error, req, 422);
   }
 
-  const post = await locationPostService.createLocationPost(value, req.user, req, next);
+  const post = await locationPostService.createLocationPost(value, req?.user, req, next);
   httpResponse(req, res, 201, 'Location post created successfully', post);
 });
 
@@ -50,7 +50,7 @@ export const updateLocationPost = asyncHandler(async (req, res, next) => {
     return httpError(next, bodyError, req, 422);
   }
 
-  const post = await locationPostService.updateLocationPost(paramsValue.id, bodyValue, req.user);
+  const post = await locationPostService.updateLocationPost(paramsValue.id, bodyValue, req?.user);
   httpResponse(req, res, 200, 'Location post updated successfully', post);
 });
 
@@ -60,7 +60,7 @@ export const deleteLocationPost = asyncHandler(async (req, res, next) => {
     return httpError(next, error, req, 422);
   }
 
-  await locationPostService.deleteLocationPost(value.id, req.user);
+  await locationPostService.deleteLocationPost(value.id, req?.user);
   httpResponse(req, res, 200, 'Location post deleted successfully');
 });
 

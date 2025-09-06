@@ -12,7 +12,7 @@ export const askQuestion = async (locationPostId, userId, questionText, req, nex
     locationPost: locationPostId,
     question: {
       text: questionText,
-      askedBy: userId
+      askedBy: userId || '687926380911cf24d2eedf07'
     },
     answers: []
   };
@@ -29,7 +29,7 @@ export const answerQuestion = async (questionId, userId, answerText, req, next) 
   // In a real system, you might check if the user is the business owner to set isOfficialAnswer
   const answerData = {
     text: answerText,
-    answeredBy: userId
+    answeredBy: userId || '687926380911cf24d2eedf07'
   };
 
   return qandaRepository.addAnswerToQuestion(questionId, answerData);

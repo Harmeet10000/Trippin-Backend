@@ -15,7 +15,7 @@ const router = express.Router();
  *   name: Q&A
  *   description: Endpoints for asking and answering questions about location posts.
  */
-router.use(protect);
+// router.use(protect);
 /**
  * @swagger
  * /location-posts/{locationPostId}/questions:

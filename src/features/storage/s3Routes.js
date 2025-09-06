@@ -44,7 +44,7 @@ const router = express.Router();
  *         data:
  *           type: object
  */
-router.use(protect);
+// router.use(protect);
 /**
  * @swagger
  * /s3/upload-url:

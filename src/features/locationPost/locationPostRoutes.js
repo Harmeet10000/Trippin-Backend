@@ -20,7 +20,7 @@ const router = express.Router();
  *   - name: Categories
  *     description: API for managing location categories.
  */
-router.use(protect);
+// router.use(protect);
 // Category Routes
 /**
  * @swagger

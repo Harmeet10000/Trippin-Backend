@@ -15,7 +15,7 @@ const router = express.Router();
  *   name: Reviews
  *   description: Endpoints for managing user reviews on location posts.
  */
-router.use(protect);
+// router.use(protect);
 /**
  * @swagger
  * /location-posts/{locationPostId}/reviews:
